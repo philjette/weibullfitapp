@@ -14,6 +14,14 @@ def login_signup():
 
     Creating an account enables you to save curves you've created and download them in CSV or XLSX formats.
     """)
+        
+    st.markdown("---")
+
+    # Add guest mode option
+    if st.button("Continue as Guest"):
+        st.session_state.user_id = None
+        st.session_state.is_guest = True
+        st.rerun()
     st.image("static_content/ExampleCurve.png")
     st.markdown("---")
 
@@ -37,14 +45,6 @@ def login_signup():
         #### Maximum Likelihood Estimation (MLE)
         A mathematical method that finds the most likely Weibull parameters to match your actual failure data. It's like finding the best-fitting curve through your data points.
         """)
-
-    st.markdown("---")
-
-    # Add guest mode option
-    if st.button("Continue as Guest"):
-        st.session_state.user_id = None
-        st.session_state.is_guest = True
-        st.rerun()
 
     st.markdown("---")
     st.write("Or create an account to save, download, and compare your curves. All you need is a username and password.")
