@@ -8,4 +8,4 @@ datetime
 sqlalchemy
 bcrypt
 typing
-jose
+python-jose
