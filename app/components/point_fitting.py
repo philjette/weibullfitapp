@@ -88,6 +88,7 @@ def point_fitting_interface():
 
         # Generate initial curve
         x_curve, y_curve = generate_weibull_curve(shape, scale, curve_type=curve_type)
+        print(x_curve)
         fig.add_trace(go.Scatter(
             x=x_curve,
             y=y_curve,
@@ -112,12 +113,10 @@ def point_fitting_interface():
                 color="black"
             ),
             xaxis=dict(
-                dict(range=[0, None]),
                 title_font=dict(size=12, family="Arial, sans-serif"),
                 tickfont=dict(size=10)
             ),
             yaxis=dict(
-                dict(range=[0, None]),
                 title_font=dict(size=12, family="Arial, sans-serif"),
                 tickfont=dict(size=10)
             )
