@@ -14,6 +14,7 @@ def login_signup():
 
     Creating an account enables you to save curves you've created and download them in CSV or XLSX formats.
     """)
+    st.image("static_content/ExampleCurve.png")
     st.markdown("---")
 
     # Add about section explaining key concepts
