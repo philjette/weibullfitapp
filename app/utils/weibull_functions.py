@@ -38,13 +38,13 @@ def generate_weibull_curve(shape, scale, num_points=100, curve_type='pdf'):
     """Generate points for plotting a Weibull curve."""
     def find_truncation_point(shape, scale):
         if curve_type.lower() == 'cdf':
-            # Find x where CDF reaches 0.9999
-            return scale * (-np.log(1 - 0.9999))**(1/shape)
+            # Find x where CDF reaches 0.999
+            return scale * (-np.log(1 - 0.999))**(1/shape)
         elif curve_type.lower() == 'hazard':
             # For hazard function, use a reasonable range
             return scale * 3
         else:  # PDF
-            # Find x where PDF drops below 0.0001
+            # Find x where PDF drops below 0.001
             # Use binary search to find the point
             x_left = 0
             x_right = scale * 10  # Start with a large range
@@ -53,7 +53,7 @@ def generate_weibull_curve(shape, scale, num_points=100, curve_type='pdf'):
                 x_mid = (x_left + x_right) / 2
                 pdf_value = weibull_pdf(x_mid, shape, scale)
 
-                if pdf_value > 0.0001:
+                if pdf_value > 0.001:
                     x_left = x_mid
                 else:
                     x_right = x_mid
