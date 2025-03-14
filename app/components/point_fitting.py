@@ -16,23 +16,27 @@ def point_fitting_interface():
         st.write("### Asset Failure Ages")
         x1 = st.number_input(
             "At what age do you expect 25% of assets to have failed?",
+            step=1,
             min_value=0.1,
-            value=1.0,
+            value=20.0,
             help="Enter the age at which 25% of assets are expected to fail"
         )
 
         x2 = st.number_input(
             "At what age do you expect 50% of assets to have failed?",
+            step=1,
             min_value=0.1,
-            value=2.0,
+            value=30.0,
             help="Enter the age at which 50% of assets are expected to fail"
         )
 
         x3 = st.number_input(
             "At what age do you expect 75% of assets to have failed?",
+            step=1,
             min_value=0.1,
-            value=3.0,
+            value=40.0,
             help="Enter the age at which 75% of assets are expected to fail"
+
         )
 
     # Validate age sequence
@@ -101,8 +105,7 @@ def point_fitting_interface():
         }[curve_type]
 
         fig.update_layout(
-            title=f"Weibull {curve_type.upper()} Curve Fit",
-            xaxis_title="Time",
+            xaxis_title="Years",
             yaxis_title=y_axis_title,
             showlegend=True,
             width=800,
@@ -112,12 +115,14 @@ def point_fitting_interface():
                 color="black"
             ),
             xaxis=dict(
-                title_font=dict(size=16, family="Arial, sans-serif"),
-                tickfont=dict(size=14)
+                dict(range=[0, None]),
+                title_font=dict(size=12, family="Arial, sans-serif"),
+                tickfont=dict(size=10)
             ),
             yaxis=dict(
-                title_font=dict(size=16, family="Arial, sans-serif"),
-                tickfont=dict(size=14)
+                dict(range=[0, None]),
+                title_font=dict(size=12, family="Arial, sans-serif"),
+                tickfont=dict(size=10)
             )
         )
 
