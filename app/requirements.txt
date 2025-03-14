@@ -1,3 +1,7 @@
 streamlit
 altair<5
 plotly
+scipy
+pandas
+numpy
+datetime
