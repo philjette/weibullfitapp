@@ -43,7 +43,7 @@ def login_signup():
     if st.button("Continue as Guest"):
         st.session_state.user_id = None
         st.session_state.is_guest = True
-        st.rerun()
+        st.experimental_rerun()
 
     st.markdown("---")
     st.write("Or create an account to save and download your curves:")
@@ -66,7 +66,7 @@ def login_signup():
                     st.session_state.token = token
                     st.session_state.is_guest = False
                     st.success("Login successful!")
-                    st.rerun()
+                    st.experimental_rerun()
                 else:
                     st.error("Invalid email or password")
 
@@ -96,4 +96,4 @@ def logout():
             st.session_state.user_id = None
             st.session_state.token = None
             st.session_state.is_guest = False
-            st.rerun()
+            st.experimental_rerun()
