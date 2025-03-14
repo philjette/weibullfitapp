@@ -16,7 +16,6 @@ def point_fitting_interface():
         st.write("### Asset Failure Ages")
         x1 = st.number_input(
             "At what age do you expect 25% of assets to have failed?",
-            step=1,
             min_value=0.1,
             value=20.0,
             help="Enter the age at which 25% of assets are expected to fail"
@@ -24,7 +23,6 @@ def point_fitting_interface():
 
         x2 = st.number_input(
             "At what age do you expect 50% of assets to have failed?",
-            step=1,
             min_value=0.1,
             value=30.0,
             help="Enter the age at which 50% of assets are expected to fail"
@@ -32,7 +30,6 @@ def point_fitting_interface():
 
         x3 = st.number_input(
             "At what age do you expect 75% of assets to have failed?",
-            step=1,
             min_value=0.1,
             value=40.0,
             help="Enter the age at which 75% of assets are expected to fail"
