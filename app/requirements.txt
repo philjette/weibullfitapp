@@ -9,5 +9,3 @@ sqlalchemy
 bcrypt
 typing
 jose
-utils
-io
