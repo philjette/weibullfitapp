@@ -265,7 +265,7 @@ def main():
                             success, message = delete_curve(curve['name'], st.session_state.user_id)
                             if success:
                                 st.success(message)
-                                st.st.experimental_rerun()  # Refresh the page to update the curve list
+                                st.experimental_rerun()  # Refresh the page to update the curve list
                             else:
                                 st.error(message)
 
