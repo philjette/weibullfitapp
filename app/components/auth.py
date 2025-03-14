@@ -46,14 +46,14 @@ def login_signup():
         st.rerun()
 
     st.markdown("---")
-    st.write("Or create an account to save and download your curves:")
+    st.write("Or create an account to save, download, and compare your curves. All you need is a username and password.")
 
     tab1, tab2 = st.tabs(["Login", "Sign Up"])
 
     with tab1:
         with st.form("login_form"):
             st.subheader("Login")
-            email = st.text_input("Email")
+            email = st.text_input("Username")
             password = st.text_input("Password", type="password")
             submit = st.form_submit_button("Login")
 
@@ -73,7 +73,7 @@ def login_signup():
     with tab2:
         with st.form("signup_form"):
             st.subheader("Sign Up")
-            new_email = st.text_input("Email")
+            new_email = st.text_input("Username")
             new_password = st.text_input("Password", type="password")
             confirm_password = st.text_input("Confirm Password", type="password")
             submit = st.form_submit_button("Sign Up")
