@@ -1,6 +1,4 @@
 import streamlit as st
-from components.auth import login_signup, logout
-from utils.curve_storage import initialize_storage
 from utils.page_config import configure_page_visibility
 
 def main():
@@ -11,30 +9,14 @@ def main():
         layout="wide"
     )
     
-    # Configure page visibility based on authentication
-    configure_page_visibility()
+    # Configure page visibility without authentication
+    if "show_all_pages" not in st.session_state:
+        configure_page_visibility()
 
-    # Initialize database storage
-    initialize_storage()
-
-    # Authentication
-    if not st.session_state.get("user_id") and not st.session_state.get("is_guest"):
-        login_signup()
-        # Add footer even on login page
-        st.markdown("""
-        <div style='position: fixed; bottom: 0; width: 100%; text-align: center; padding: 10px; font-size: 0.8em;'>
-            Created by <a href='https://www.linkedin.com/in/philjette/' target='_blank'>Philippe Jette</a>
-        </div>
-        """, unsafe_allow_html=True)
-        return
-
-    # Show logout button in sidebar
-    logout()
-
-    # Welcome screen content for logged-in users
+    # Welcome screen content
     st.title("AI powered reliability analysis")
     
-    # Updated app description (summary blurb)
+    # App description (summary blurb)
     st.markdown("""
     
     Weibullfit is a powerful statistical modeling application designed to help engineers and reliability professionals analyze asset life and failure probability through advanced Weibull distribution modeling. 
@@ -57,7 +39,7 @@ def main():
     5. **FMEA-based fit**: Generate failure curves by failure mode based on an FMEA            
     
     """)
-
+    
     # Add helpful information about navigation
     st.info("Use the sidebar navigation to access the different fitting methods and tools.")
 
