@@ -2,7 +2,7 @@ import streamlit as st
 from components.mle_fitting import mle_fitting_interface
 
 st.set_page_config(
-    page_title="MLE Fitting | WeibullFitPro",
+    page_title="MLE Fitting | WeibullFit",
     page_icon="📊",
     layout="wide"
 )

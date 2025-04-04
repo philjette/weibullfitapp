@@ -2,7 +2,7 @@ import streamlit as st
 from components.guided_selection import guided_selection_interface
 
 st.set_page_config(
-    page_title="Guided Fit | WeibullFitPro",
+    page_title="Guided Fit | WeibullFit",
     page_icon="🧭",
     layout="wide"
 )

@@ -2,7 +2,7 @@ import streamlit as st
 from components.point_fitting import point_fitting_interface
 
 st.set_page_config(
-    page_title="Point-Based Fit | WeibullFitPro",
+    page_title="Point-Based Fit | WeibullFit",
     page_icon="📊",
     layout="wide"
 )
