@@ -23,7 +23,7 @@ st.set_page_config(
 )
 
 # Title and description
-st.title("FMEA Generator for Electrical T&D Assets")
+st.title("AI-Powered FMEA Analysis")
 st.markdown(
     """
     This tool helps generate Failure Mode and Effects Analysis (FMEA) for electrical 
