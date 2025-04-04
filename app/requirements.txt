@@ -10,3 +10,4 @@ bcrypt
 typing
 python-jose
 openpyxl
+openai

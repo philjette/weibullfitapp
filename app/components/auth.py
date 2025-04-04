@@ -8,11 +8,11 @@ def login_signup():
         st.session_state.user_id = None
 
     # Add welcome header and description
-    st.title("Welcome to WeibullFitPro!")
+    st.title("AI-Powered Reliability Analsyis")
     st.markdown("""
     ### The professional toolkit for reliability engineering
     
-    WeibullFitPro is a powerful statistical modeling application designed to help engineers and reliability professionals analyze asset life and failure probability through advanced Weibull distribution modeling. Create, save, and compare models using various fitting methods, from simple point-based estimation to sophisticated Maximum Likelihood techniques.
+    WeibullFit is a powerful statistical modeling application designed to help engineers and reliability professionals analyze asset life and failure probability through advanced Weibull distribution modeling. Create, save, and compare models using various fitting methods, from simple point-based estimation to sophisticated Maximum Likelihood techniques.
 
     Creating an account enables you to save curves you've created and download them in CSV or XLSX formats.
     """)
