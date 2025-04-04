@@ -1,6 +1,4 @@
 import streamlit as st
-from components.auth import login_signup, logout
-from utils.curve_storage import initialize_storage
 from utils.page_config import configure_page_visibility
 
 def main():
@@ -11,30 +9,14 @@ def main():
         layout="wide"
     )
     
-    # Configure page visibility based on authentication
-    configure_page_visibility()
+    # Configure page visibility without authentication
+    if "show_all_pages" not in st.session_state:
+        configure_page_visibility()
 
-    # Initialize database storage
-    initialize_storage()
-
-    # Authentication
-    if not st.session_state.get("user_id") and not st.session_state.get("is_guest"):
-        login_signup()
-        # Add footer even on login page
-        st.markdown("""
-        <div style='position: fixed; bottom: 0; width: 100%; text-align: center; padding: 10px; font-size: 0.8em;'>
-            Created by <a href='https://www.linkedin.com/in/philjette/' target='_blank'>Philippe Jette</a>
-        </div>
-        """, unsafe_allow_html=True)
-        return
-
-    # Show logout button in sidebar
-    logout()
-
-    # Welcome screen content for logged-in users
+    # Welcome screen content
     st.title("Welcome to WeibullFitPro")
     
-    # Updated app description (summary blurb)
+    # App description (summary blurb)
     st.markdown("""
     ## About WeibullFitPro
     
@@ -43,9 +25,8 @@ def main():
     With WeibullFitPro, you can:
     - Generate Weibull curves using multiple fitting methods
     - Analyze the probability of failure over time
-    - Compare different reliability models
+    - View different probability distribution functions
     - Export data for further analysis
-    - Save your models for future reference
     
     ### Getting Started
     
@@ -56,12 +37,28 @@ def main():
     3. **Guided Fit**: Answer questions about your assets to determine appropriate parameters
     4. **MLE Fitting**: Upload a CSV file with asset data to calculate parameters using statistical methods
     
-    """)
+    ### About Statistical Concepts
     
-    # Show guest mode warning if applicable
-    if st.session_state.get("is_guest"):
-        st.warning("⚠️ You are in Guest Mode: Save and download features are disabled. Log in to access all features.")
-
+    <details>
+    <summary>Click to learn about key statistical concepts</summary>
+    
+    #### Weibull Distribution
+    A versatile distribution used to model the lifetime of assets and predict failure rates. It's particularly useful for reliability engineering and maintenance planning.
+    
+    #### Probability Density Function (PDF)
+    Shows how likely different failure times are. Think of it as a "probability map" showing which ages are most common for failures to occur.
+    
+    #### Cumulative Distribution Function (CDF)
+    Shows the total probability of failure up to a certain age. For example, a CDF value of 0.75 at 5 years means there's a 75% chance of failure within the first 5 years.
+    
+    #### Hazard Function (Failure Rate)
+    Represents the likelihood of immediate failure for an asset that has survived up to a certain age. Useful for understanding how failure risk changes over time.
+    
+    #### Maximum Likelihood Estimation (MLE)
+    A mathematical method that finds the most likely Weibull parameters to match your actual failure data. It's like finding the best-fitting curve through your data points.
+    </details>
+    """, unsafe_allow_html=True)
+    
     # Add helpful information about navigation
     st.info("Use the sidebar navigation to access the different fitting methods and tools.")
 

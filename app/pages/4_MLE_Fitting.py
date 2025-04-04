@@ -7,10 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Check if user is logged in
-if "user_id" not in st.session_state and not st.session_state.get("is_guest"):
-    st.warning("Please log in or continue as guest from the home page.")
-    st.stop()
+# No login checks needed - all pages are accessible now
 
 # Display main interface
 st.title("Maximum Likelihood Estimation (MLE) Fitting")
