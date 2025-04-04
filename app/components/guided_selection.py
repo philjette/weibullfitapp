@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 from utils.weibull_functions import generate_weibull_curve
-from utils.curve_storage import save_curve
+from utils.export import export_curve_data, get_csv_download, get_excel_download
 
 def guided_selection_interface():
     """Interface for guided parameter selection."""
@@ -123,22 +123,44 @@ def guided_selection_interface():
     st.write(f"Shape (k): {shape:.3f}")
     st.write(f"Scale (λ): {scale:.3f}")
 
-    # Only show save functionality for logged-in users
-    if not st.session_state.get("is_guest"):
-        st.subheader("Save This Curve")
-        name = st.text_input("Curve Name")
-        description = st.text_area("Description")
-
-        if st.button("Save Curve"):
-            success, message = save_curve(
-                name, 
-                description, 
-                shape, 
-                scale, 
-                "Guided Selection",
-                st.session_state.get("user_id")
-            )
-            if success:
-                st.success(message)
-            else:
-                st.error(message)
+    # Export data section
+    st.subheader("Export Curve Data")
+    
+    export_type = st.radio(
+        "Export Data Type",
+        ["PDF Only", "CDF Only", "Hazard Function Only", "PDF and CDF", "All Functions"],
+        index=3,
+        key="guided_export_type"
+    )
+    
+    export_curve_type = {
+        "PDF Only": "pdf",
+        "CDF Only": "cdf",
+        "Hazard Function Only": "hazard",
+        "PDF and CDF": "both",
+        "All Functions": "all"
+    }[export_type]
+    
+    # Generate export data
+    export_df = export_curve_data(shape, scale, curve_type=export_curve_type)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        # CSV download
+        csv_data, csv_filename = get_csv_download(export_df, f"weibull_curve_shape{shape:.2f}_scale{scale:.2f}")
+        st.download_button(
+            label="Download CSV",
+            data=csv_data,
+            file_name=csv_filename,
+            mime="text/csv"
+        )
+    
+    with col2:
+        # Excel download
+        excel_data, excel_filename = get_excel_download(export_df, f"weibull_curve_shape{shape:.2f}_scale{scale:.2f}")
+        st.download_button(
+            label="Download Excel",
+            data=excel_data,
+            file_name=excel_filename,
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )

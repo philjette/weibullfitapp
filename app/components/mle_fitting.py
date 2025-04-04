@@ -2,11 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime
+from io import BytesIO
 import plotly.graph_objects as go
 from scipy.optimize import minimize
 from scipy.special import gamma
 from utils.weibull_functions import generate_weibull_curve
-from utils.curve_storage import save_curve
+from utils.export import export_curve_data, get_csv_download, get_excel_download
 
 def calculate_lifetimes(df):
     """Calculate lifetime for each asset."""
@@ -169,25 +170,120 @@ def mle_fitting_interface():
 
                 st.plotly_chart(fig)
 
-                # Only show save functionality for logged-in users
-                if not st.session_state.get("is_guest"):
-                    st.subheader("Save This Curve")
-                    name = st.text_input("Curve Name")
-                    description = st.text_area("Description")
-
-                    if st.button("Save Curve"):
-                        success, message = save_curve(
-                            name,
-                            description,
-                            shape,
-                            scale,
-                            "Maximum Likelihood Estimation",
-                            st.session_state.get("user_id")
-                        )
-                        if success:
-                            st.success(message)
-                        else:
-                            st.error(message)
+                # Export data section
+                st.subheader("Export Curve Data")
+                
+                # View different distribution types
+                dist_type = st.radio(
+                    "View Distribution Type",
+                    ["PDF", "CDF", "Hazard Function"],
+                    index=0,
+                    key="mle_dist_view"
+                )
+                
+                view_curve_type = dist_type.lower().replace(" function", "")
+                
+                # Show the selected curve type
+                x_view, y_view = generate_weibull_curve(shape, scale, curve_type=view_curve_type)
+                
+                view_fig = go.Figure()
+                view_fig.add_trace(go.Scatter(
+                    x=x_view,
+                    y=y_view,
+                    name=f'Fitted {dist_type}'
+                ))
+                
+                y_axis_title = {
+                    'pdf': "Probability Density",
+                    'cdf': "Cumulative Probability",
+                    'hazard': "Hazard Rate (Failures per Unit Time)"
+                }[view_curve_type]
+                
+                view_fig.update_layout(
+                    title=f"Fitted Weibull {dist_type}",
+                    xaxis_title="Lifetime (years)",
+                    yaxis_title=y_axis_title,
+                    width=800
+                )
+                
+                st.plotly_chart(view_fig)
+                
+                # Export options
+                export_type = st.radio(
+                    "Export Data Type",
+                    ["PDF Only", "CDF Only", "Hazard Function Only", "PDF and CDF", "All Functions"],
+                    index=3,
+                    key="mle_export_type"
+                )
+                
+                export_curve_type = {
+                    "PDF Only": "pdf",
+                    "CDF Only": "cdf",
+                    "Hazard Function Only": "hazard",
+                    "PDF and CDF": "both",
+                    "All Functions": "all"
+                }[export_type]
+                
+                # Generate export data
+                export_df = export_curve_data(shape, scale, curve_type=export_curve_type)
+                
+                # Also export the raw data used for fitting
+                if st.checkbox("Include raw data in export"):
+                    original_data_df = pd.DataFrame({
+                        'asset_identifier': df['asset_identifier'],
+                        'in_service_date': df['in_service_date'],
+                        'retirement_date': df['retirement_date'],
+                        'lifetime_years': df['lifetime']
+                    })
+                    
+                    # Create a dictionary for Excel writer to handle multiple sheets
+                    excel_dfs = {
+                        'Fitted_Curve': export_df,
+                        'Raw_Data': original_data_df
+                    }
+                    
+                    # Custom Excel export for multiple sheets
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    excel_filename = f"weibull_mle_fit_{timestamp}.xlsx"
+                    
+                    output = BytesIO()
+                    with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                        for sheet_name, sheet_df in excel_dfs.items():
+                            sheet_df.to_excel(writer, sheet_name=sheet_name, index=False)
+                        
+                        # Add parameters sheet
+                        params_df = pd.DataFrame({
+                            'Parameter': ['Shape (k)', 'Scale (λ)'],
+                            'Value': [shape, scale]
+                        })
+                        params_df.to_excel(writer, sheet_name='Parameters', index=False)
+                    
+                    excel_data = output.getvalue()
+                    
+                    # Single CSV with just the curve data
+                    csv_data, csv_filename = get_csv_download(export_df, f"weibull_mle_fit")
+                else:
+                    # Standard export
+                    csv_data, csv_filename = get_csv_download(export_df, f"weibull_curve_shape{shape:.2f}_scale{scale:.2f}")
+                    excel_data, excel_filename = get_excel_download(export_df, f"weibull_curve_shape{shape:.2f}_scale{scale:.2f}")
+                
+                # Download buttons
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.download_button(
+                        label="Download CSV",
+                        data=csv_data,
+                        file_name=csv_filename,
+                        mime="text/csv"
+                    )
+                
+                with col2:
+                    st.download_button(
+                        label="Download Excel",
+                        data=excel_data,
+                        file_name=excel_filename,
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    )
 
             except ValueError as ve:
                 st.error(f"Error fitting Weibull distribution: {str(ve)}")
