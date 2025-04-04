@@ -78,6 +78,7 @@ def guided_selection_interface():
         }[curve_type]
 
         fig.update_layout(
+            title=f"Weibull {curve_type.upper()} Distribution",
             xaxis_title="Time",
             yaxis_title=y_axis_title,
             showlegend=False,
@@ -88,12 +89,12 @@ def guided_selection_interface():
                 color="black"
             ),
             xaxis=dict(
-                title_font=dict(size=12, family="Arial, sans-serif"),
-                tickfont=dict(size=10)
+                title_font=dict(size=16, family="Arial, sans-serif"),
+                tickfont=dict(size=14)
             ),
             yaxis=dict(
-                title_font=dict(size=12, family="Arial, sans-serif"),
-                tickfont=dict(size=10)
+                title_font=dict(size=16, family="Arial, sans-serif"),
+                tickfont=dict(size=14)
             )
         )
         st.plotly_chart(fig, key="guided_selection_plot", use_container_width=False)

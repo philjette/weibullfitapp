@@ -17,23 +17,22 @@ def point_fitting_interface():
         x1 = st.number_input(
             "At what age do you expect 25% of assets to have failed?",
             min_value=0.1,
-            value=20.0,
+            value=1.0,
             help="Enter the age at which 25% of assets are expected to fail"
         )
 
         x2 = st.number_input(
             "At what age do you expect 50% of assets to have failed?",
             min_value=0.1,
-            value=30.0,
+            value=2.0,
             help="Enter the age at which 50% of assets are expected to fail"
         )
 
         x3 = st.number_input(
             "At what age do you expect 75% of assets to have failed?",
             min_value=0.1,
-            value=40.0,
+            value=3.0,
             help="Enter the age at which 75% of assets are expected to fail"
-
         )
 
     # Validate age sequence
@@ -88,7 +87,6 @@ def point_fitting_interface():
 
         # Generate initial curve
         x_curve, y_curve = generate_weibull_curve(shape, scale, curve_type=curve_type)
-        print(x_curve)
         fig.add_trace(go.Scatter(
             x=x_curve,
             y=y_curve,
@@ -103,7 +101,8 @@ def point_fitting_interface():
         }[curve_type]
 
         fig.update_layout(
-            xaxis_title="Years",
+            title=f"Weibull {curve_type.upper()} Curve Fit",
+            xaxis_title="Time",
             yaxis_title=y_axis_title,
             showlegend=True,
             width=800,
@@ -113,12 +112,12 @@ def point_fitting_interface():
                 color="black"
             ),
             xaxis=dict(
-                title_font=dict(size=12, family="Arial, sans-serif"),
-                tickfont=dict(size=10)
+                title_font=dict(size=16, family="Arial, sans-serif"),
+                tickfont=dict(size=14)
             ),
             yaxis=dict(
-                title_font=dict(size=12, family="Arial, sans-serif"),
-                tickfont=dict(size=10)
+                title_font=dict(size=16, family="Arial, sans-serif"),
+                tickfont=dict(size=14)
             )
         )
 

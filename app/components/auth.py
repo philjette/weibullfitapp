@@ -8,21 +8,14 @@ def login_signup():
         st.session_state.user_id = None
 
     # Add welcome header and description
-    st.title("Welcome to Weibull Fit!")
+    st.title("Welcome to WeibullFitPro!")
     st.markdown("""
-    A powerful statistical modeling application designed to help engineers and reliability professionals analyze asset life and failure probability through advanced Weibull distribution modeling. Create, save, and compare models using various fitting methods, from simple point-based estimation to sophisticated Maximum Likelihood techniques.
+    ### The professional toolkit for reliability engineering
+    
+    WeibullFitPro is a powerful statistical modeling application designed to help engineers and reliability professionals analyze asset life and failure probability through advanced Weibull distribution modeling. Create, save, and compare models using various fitting methods, from simple point-based estimation to sophisticated Maximum Likelihood techniques.
 
     Creating an account enables you to save curves you've created and download them in CSV or XLSX formats.
     """)
-        
-    st.markdown("---")
-
-    # Add guest mode option
-    if st.button("Continue as Guest"):
-        st.session_state.user_id = None
-        st.session_state.is_guest = True
-        st.rerun()
-    st.image("static_content/ExampleCurve.png")
     st.markdown("---")
 
     # Add about section explaining key concepts
@@ -31,7 +24,7 @@ def login_signup():
         ### Key Concepts
 
         #### Weibull Distribution
-        A versatile statistical tool used to model the lifetime of assets and predict failure rates. It's particularly useful for reliability engineering and maintenance planning.
+        A versatile distribution used to model the lifetime of assets and predict failure rates. It's particularly useful for reliability engineering and maintenance planning.
 
         #### Probability Density Function (PDF)
         Shows how likely different failure times are. Think of it as a "probability map" showing which ages are most common for failures to occur.
@@ -47,14 +40,22 @@ def login_signup():
         """)
 
     st.markdown("---")
-    st.write("Or create an account to save, download, and compare your curves. All you need is a username and password.")
+
+    # Add guest mode option
+    if st.button("Continue as Guest"):
+        st.session_state.user_id = None
+        st.session_state.is_guest = True
+        st.rerun()
+
+    st.markdown("---")
+    st.write("Or create an account to save and download your curves:")
 
     tab1, tab2 = st.tabs(["Login", "Sign Up"])
 
     with tab1:
         with st.form("login_form"):
             st.subheader("Login")
-            email = st.text_input("Username")
+            email = st.text_input("Email")
             password = st.text_input("Password", type="password")
             submit = st.form_submit_button("Login")
 
@@ -74,7 +75,7 @@ def login_signup():
     with tab2:
         with st.form("signup_form"):
             st.subheader("Sign Up")
-            new_email = st.text_input("Username")
+            new_email = st.text_input("Email")
             new_password = st.text_input("Password", type="password")
             confirm_password = st.text_input("Confirm Password", type="password")
             submit = st.form_submit_button("Sign Up")
