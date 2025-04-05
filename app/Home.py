@@ -1,62 +1,59 @@
 import streamlit as st
-from utils.page_config import configure_page_visibility
 from streamlit_option_menu import option_menu
 
-# Configure page settings at the top
-st.set_page_config(
-    page_title="WeibullFit | Home",
-    page_icon="📈",
-    layout="wide"
+# Import pages as modules
+from app_pages import (
+    fitting_guided,
+    point_based_fit,
+    parameter_based_fit,
+    historical_data_fit,
+    fmea_based_fit
 )
 
-def main():
-    """Home of AI-powered reliability analysis"""
+# Set page configuration
+st.set_page_config(page_title="WeibullFit | Home", page_icon="📈", layout="wide")
 
+# Sidebar navigation
+with st.sidebar:
+    selected_section = option_menu(
+        "📈 WeibullFit Menu",
+        ["Home", "Fitting Methods", "Data-Based Methods"],
+        icons=["house", "tools", "database"],
+        menu_icon="cast",
+        default_index=0
+    )
 
-    # Configure page visibility without authentication
-    if "show_all_pages" not in st.session_state:
-        configure_page_visibility()
-
-    # Sidebar navigation using option_menu
-    with st.sidebar:
-        selected_section = option_menu(
-            "📈 WeibullFit Menu",
-            ["Fitting Methods", "Data-Based Methods"],
-            icons=["tools", "database"],
-            menu_icon="cast",
-            default_index=0
-        )
-
-        if selected_section == "Fitting Methods":
-            selected_page = st.radio("Choose a fitting method:", [
-                "Point-Based Fit",
-                "Parameter-Based Fit",
-                "Guided Fit"
-            ])
-        elif selected_section == "Data-Based Methods":
-            selected_page = st.radio("Choose a data-based method:", [
-                "Historical Data Fit",
-                "FMEA-Based Fit"
-            ])
-        else:
-            selected_page = None
-
-    # Page routing based on selection
+    # Determine the subpage selection under "Fitting Methods" and "Data-Based Methods"
+    selected_page = None
     if selected_section == "Fitting Methods":
-        if selected_page == "Point-Based Fit":
-            st.switch_page("app_pages/1_Fitting_Point_Based.py")
-        elif selected_page == "Parameter-Based Fit":
-            st.switch_page("app_pages/2_Fitting_Parameter_Based.py")
-        elif selected_page == "Guided Fit":
-            st.switch_page("app_pages/3_Fitting_Guided.py")
-
+        selected_page = st.radio("Choose a fitting method:", [
+            "Point-Based Fit",
+            "Parameter-Based Fit",
+            "Guided Fit"
+        ])
     elif selected_section == "Data-Based Methods":
-        if selected_page == "Historical Data Fit":
-            st.switch_page("app_pages/4_Data_Historical.py")
-        elif selected_page == "FMEA-Based Fit":
-            st.switch_page("app_pages/5_FMEA_Based.py")
+        selected_page = st.radio("Choose a data-based method:", [
+            "Historical Data Fit",
+            "FMEA-Based Fit"
+        ])
 
-    # Welcome screen content (only shown when on Home)
+# Page routing
+if selected_section == "Fitting Methods":
+    if selected_page == "Point-Based Fit":
+        point_based_fit.show()
+    elif selected_page == "Parameter-Based Fit":
+        parameter_based_fit.show()
+    elif selected_page == "Guided Fit":
+        fitting_guided.show()
+
+elif selected_section == "Data-Based Methods":
+    if selected_page == "Historical Data Fit":
+        historical_data_fit.show()
+    elif selected_page == "FMEA-Based Fit":
+        fmea_based_fit.show()
+
+else:
+    # Default home content
     st.title("AI powered reliability analysis")
 
     st.markdown("""
@@ -87,6 +84,3 @@ def main():
         Created by <a href='https://www.linkedin.com/in/philjette/' target='_blank'>Philippe Jette</a>
     </div>
     """, unsafe_allow_html=True)
-
-if __name__ == "__main__":
-    main()
