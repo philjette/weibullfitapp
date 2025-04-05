@@ -43,17 +43,17 @@ def main():
     # Page routing based on selection
     if selected_section == "Fitting Methods":
         if selected_page == "Point-Based Fit":
-            st.switch_page("pages/1_Fitting_Point_Based.py")
+            st.switch_page("app_pages/1_Fitting_Point_Based.py")
         elif selected_page == "Parameter-Based Fit":
-            st.switch_page("pages/2_Fitting_Parameter_Based.py")
+            st.switch_page("app_pages/2_Fitting_Parameter_Based.py")
         elif selected_page == "Guided Fit":
-            st.switch_page("pages/3_Fitting_Guided.py")
+            st.switch_page("app_pages/3_Fitting_Guided.py")
 
     elif selected_section == "Data-Based Methods":
         if selected_page == "Historical Data Fit":
-            st.switch_page("pages/4_Data_Historical.py")
+            st.switch_page("app_pages/4_Data_Historical.py")
         elif selected_page == "FMEA-Based Fit":
-            st.switch_page("pages/5_FMEA_Based.py")
+            st.switch_page("app_pages/5_FMEA_Based.py")
 
     # Welcome screen content (only shown when on Home)
     st.title("AI powered reliability analysis")
