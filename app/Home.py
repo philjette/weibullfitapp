@@ -16,10 +16,14 @@ st.set_page_config(page_title="AssetX | Home", page_icon="📈", layout="wide")
 # Sidebar navigation
 with st.sidebar:
 
-    st.logo("static_content/logo.png")
+    st.logo(
+    "static_content/logo.png",
+    link="https://www.assetx.pro",
+    )
+
     selected_section = option_menu(
         "Menu",
-        ["Home", "Curve Fitting", "FMEA"],
+        ["Home", "Curve Fitting", "FMEA Tools"],
         icons=["house", "graph-up", "sliders"],
         #menu_icon="database",
         default_index=0
@@ -31,10 +35,10 @@ with st.sidebar:
         selected_page = st.radio("Choose a fitting method:", [
             "Point-Based Fit",
             "Parameter-Based Fit",
-            "Guided Fit"
+            "Guided Fit",
             "Historical Data Fit"
         ])
-    elif selected_section == "FMEA":
+    elif selected_section == "FMEA Tools":
         selected_page = st.radio("", [
             "FMEA Generation"
         ])
@@ -48,9 +52,9 @@ if selected_section == "Curve Fitting":
     elif selected_page == "Guided Fit":
         fitting_guided.show()
     elif selected_page == "Historical Data Fit":
-        fitting_guided.show()
+        historical_data_fit.show()
 
-elif selected_section == "Data-Based Methods":
+elif selected_section == "FMEA Tools":
     if selected_page == "FMEA Generation":
         fmea_based_fit.show()
 
