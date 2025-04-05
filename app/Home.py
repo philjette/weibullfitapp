@@ -6,7 +6,7 @@ def main():
 
         
     point_based_page = st.Page("pages/1_Point_Based_Fit.py", title="Point Based")
-    direct_page = st.Page("pages/2_Direct_Paramener_Fit.py", title="Parameter Based")
+    direct_page = st.Page("pages/2_Direct_Parameter_Fit.py", title="Parameter Based")
 
     pg = st.navigation([point_based_page, direct_page])
 
