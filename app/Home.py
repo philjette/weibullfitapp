@@ -17,7 +17,7 @@ st.set_page_config(page_title="WeibullFit | Home", page_icon="📈", layout="wid
 with st.sidebar:
     selected_section = option_menu(
         "Menu",
-        ["Home", "Fitting Methods", "Data-Based Methods"],
+        ["Home", "Curve Fitting", "FMEA"],
         icons=["house", "graph-up", "sliders"],
         #menu_icon="database",
         default_index=0
