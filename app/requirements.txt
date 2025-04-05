@@ -11,3 +11,4 @@ typing
 python-jose
 openpyxl
 openai
+streamlit_option_menu
