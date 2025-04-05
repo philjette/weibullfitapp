@@ -12,6 +12,7 @@ st.set_page_config(
 def main():
     """Home of AI-powered reliability analysis"""
 
+
     # Configure page visibility without authentication
     if "show_all_pages" not in st.session_state:
         configure_page_visibility()
