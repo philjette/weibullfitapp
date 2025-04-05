@@ -16,48 +16,48 @@ st.set_page_config(page_title="WeibullFit | Home", page_icon="📈", layout="wid
 # Sidebar navigation
 with st.sidebar:
     selected_section = option_menu(
-        "📈 WeibullFit Menu",
+        "Menu",
         ["Home", "Fitting Methods", "Data-Based Methods"],
-        icons=["house", "tools", "database"],
-        menu_icon="cast",
+        icons=["house", "graph-up", "sliders"],
+        #menu_icon="database",
         default_index=0
     )
 
     # Determine the subpage selection under "Fitting Methods" and "Data-Based Methods"
     selected_page = None
-    if selected_section == "Fitting Methods":
+    if selected_section == "Curve Fitting":
         selected_page = st.radio("Choose a fitting method:", [
             "Point-Based Fit",
             "Parameter-Based Fit",
             "Guided Fit"
+            "Historical Data Fit"
         ])
-    elif selected_section == "Data-Based Methods":
-        selected_page = st.radio("Choose a data-based method:", [
-            "Historical Data Fit",
-            "FMEA-Based Fit"
+    elif selected_section == "FMEA":
+        selected_page = st.radio("", [
+            "FMEA Generation"
         ])
 
 # Page routing
-if selected_section == "Fitting Methods":
+if selected_section == "Curve Fitting":
     if selected_page == "Point-Based Fit":
         point_based_fit.show()
     elif selected_page == "Parameter-Based Fit":
         parameter_based_fit.show()
     elif selected_page == "Guided Fit":
         fitting_guided.show()
+    elif selected_page == "Historical Data Fit":
+        fitting_guided.show()
 
 elif selected_section == "Data-Based Methods":
-    if selected_page == "Historical Data Fit":
-        historical_data_fit.show()
-    elif selected_page == "FMEA-Based Fit":
+    if selected_page == "FMEA Generation":
         fmea_based_fit.show()
 
 else:
     # Default home content
-    st.title("AI powered reliability analysis")
+    st.title("AI-Powered Reliability Tools")
 
     st.markdown("""
-    Weibullfit is a powerful statistical modeling application designed to help engineers and reliability professionals analyze asset life and failure probability through advanced Weibull distribution modeling. 
+    Weibullfit provides a set of tools designed to help engineers and reliability professionals to optimize asset reliability through end-of-life modelling and failures modes and effects analysis. 
     
     Capabilities:
     - Generate failure curves using multiple fitting methods
