@@ -1,11 +1,11 @@
 import streamlit as st
 from components.direct_params import direct_params_interface
 
-st.set_page_config(
-    page_title="Direct Parameter Fit | WeibullFit",
-    page_icon="🔢",
-    layout="wide"
-)
+#st.set_page_config(
+#    page_title="Direct Parameter Fit | WeibullFit",
+#    page_icon="🔢",
+#    layout="wide"
+#)
 
 # No login checks needed - all pages are accessible now
 
