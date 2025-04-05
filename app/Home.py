@@ -3,12 +3,21 @@ from utils.page_config import configure_page_visibility
 
 def main():
     """Home of AI-powered reliability analysis"""
+
+        
+    point_based_page = st.Page("pages/1_Point_Based_Fit.py", title="Point Based")
+    direct_page = st.Page("pages/2_Direct_Paramener_Fit.py", title="Parameter Based")
+
+    pg = st.navigation([point_based_page, direct_page])
+
     st.set_page_config(
         page_title="WeibullFit | Home",
         page_icon="📈",
         layout="wide"
     )
-    
+
+    pg.run()
+
     # Configure page visibility without authentication
     if "show_all_pages" not in st.session_state:
         configure_page_visibility()
