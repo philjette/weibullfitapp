@@ -15,6 +15,8 @@ st.set_page_config(page_title="AssetX | Home", page_icon="📈", layout="wide")
 
 # Sidebar navigation
 with st.sidebar:
+
+    st.logo("static_content/logo.png")
     selected_section = option_menu(
         "Menu",
         ["Home", "Curve Fitting", "FMEA"],
