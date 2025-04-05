@@ -11,7 +11,7 @@ from app_pages import (
 )
 
 # Set page configuration
-st.set_page_config(page_title="WeibullFit | Home", page_icon="📈", layout="wide")
+st.set_page_config(page_title="AssetX | Home", page_icon="📈", layout="wide")
 
 # Sidebar navigation
 with st.sidebar:
@@ -57,7 +57,7 @@ else:
     st.title("AI-Powered Reliability Tools")
 
     st.markdown("""
-    Weibullfit provides a set of tools designed to help engineers and reliability professionals to optimize asset reliability through end-of-life modelling and failures modes and effects analysis. 
+    AssetX provides a set of tools designed to help engineers and reliability professionals to optimize asset reliability through end-of-life modelling and failures modes and effects analysis. 
     
     Capabilities:
     - Generate failure curves using multiple fitting methods
