@@ -15,12 +15,7 @@ from utils.asset_data import (
     get_default_failure_modes,
 )
 
-# Page configuration
-st.set_page_config(
-    page_title="FMEA Generator",
-    page_icon="⚡",
-    layout="wide",
-)
+st.title("FMEA-Based Fit")
 
 # Title and description
 st.title("AI-Powered FMEA Analysis")

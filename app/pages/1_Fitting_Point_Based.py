@@ -1,20 +1,16 @@
 import streamlit as st
-from components.direct_params import direct_params_interface
+from components.point_fitting import point_fitting_interface
 
-st.set_page_config(
-    page_title="Direct Parameter Fit | WeibullFit",
-    page_icon="🔢",
-    layout="wide"
-)
+st.title("Point-Based Fit")
 
 # No login checks needed - all pages are accessible now
 
 # Display main interface
-st.title("Direct Parameter Fitting")
-st.write("Directly input Weibull distribution parameters to generate a curve.")
+st.title("Point-Based Fitting")
+st.write("Fit a Weibull curve by providing points on the cumulative distribution function.")
 
-# Call the direct parameter interface
-direct_params_interface()
+# Call the point fitting interface
+point_fitting_interface()
 
 # Add footer
 st.markdown("""
