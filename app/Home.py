@@ -16,9 +16,9 @@ st.set_page_config(page_title="AssetX | Home", page_icon="📈", layout="wide")
 # Sidebar navigation
 with st.sidebar:
 
-    st.logo(
+    st.image(
     "static_content/logo.png",
-    link="https://www.assetx.pro",
+    width=150
     )
 
     selected_section = option_menu(
@@ -61,6 +61,8 @@ elif selected_section == "FMEA Tools":
 else:
     # Default home content
     st.title("AI-Powered Reliability Tools")
+
+    st.image("static_content/ExampleCurve.png")
 
     st.markdown("""
     AssetX provides a set of tools designed to help engineers and reliability professionals to optimize asset reliability through end-of-life modelling and failures modes and effects analysis. 
