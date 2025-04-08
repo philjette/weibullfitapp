@@ -23,7 +23,7 @@ def show():
         """
         Generate Failure Mode and Effects Analysis (FMEA). Specify your asset characteristics below
         and the system will generate an FMEA along with corresponding Weibull failure curves.
-        Currently only available for select elctrical transmission and distribution assets.
+        Currently only available for select elctrical transmission and distribution assets.0]
         """
     )
 
@@ -494,42 +494,42 @@ def show():
         pass
         
         # Placeholder content with explanations
-        with st.expander("What is an FMEA?"):
-            st.markdown("""
-            **Failure Mode and Effects Analysis (FMEA)** is a systematic, proactive method for evaluating a process 
-            to identify where and how it might fail, and to assess the relative impact of different failures to 
-            prioritize corrective actions.
-            
-            FMEA typically includes:
-            - **Failure Modes**: The ways in which something might fail
-            - **Effects**: The consequences of those failures
-            - **Causes**: Why the failures might occur
-            - **Risk Assessment**: Typically using Severity, Occurrence, and Detection ratings
-            - **RPN (Risk Priority Number)**: A metric to prioritize attention (Severity × Occurrence × Detection)
-            """)
-        
-        with st.expander("What is a Weibull Analysis?"):
-            st.markdown("""
-            **Weibull Analysis** is a method used in reliability engineering to model and analyze failure data. 
-            The Weibull distribution is flexible and can model a variety of failure behaviors.
-            
-            Key components:
-            - **Weibull Shape Parameter (β)**: Describes the pattern of failures over time
-            - β < 1: Decreasing failure rate (early failures)
-            - β = 1: Constant failure rate (random failures)
-            - β > 1: Increasing failure rate (wear-out failures)
-            
-            - **Weibull Scale Parameter (η)**: Characteristic life, the time at which 63.2% of items will fail
-            
-            - **Weibull Curves**: Visual representation of failure probability or reliability over time
-            """)
-        
-        with st.expander("How to use this application"):
-            st.markdown("""
-            1. Select your asset type from the dropdown above
-            2. Configure the operating characteristics relevant to your asset
-            3. Set advanced options if needed (temperature profile, maintenance regime, etc.)
-            4. Click 'Generate FMEA' to create your analysis
-            5. Explore the results in the FMEA Results and Weibull Analysis tabs
-            6. Export your results in your preferred format
-            """)
+        #with st.expander("What is an FMEA?"):
+        #    st.markdown("""
+        #    **Failure Mode and Effects Analysis (FMEA)** is a systematic, proactive method for evaluating a process 
+        #   to identify where and how it might fail, and to assess the relative impact of different failures to 
+        #    prioritize corrective actions.
+        #    
+        #    FMEA typically includes:
+        #    - **Failure Modes**: The ways in which something might fail
+        #    - **Effects**: The consequences of those failures
+        #    - **Causes**: Why the failures might occur
+        #    - **Risk Assessment**: Typically using Severity, Occurrence, and Detection ratings
+        #    - **RPN (Risk Priority Number)**: A metric to prioritize attention (Severity × Occurrence × Detection)
+        #    """)
+        #
+        #with st.expander("What is a Weibull Analysis?"):
+        #    st.markdown("""
+        #    **Weibull Analysis** is a method used in reliability engineering to model and analyze failure data. 
+        #    The Weibull distribution is flexible and can model a variety of failure behaviors.
+        #    
+        #    Key components:
+        #    - **Weibull Shape Parameter (β)**: Describes the pattern of failures over time
+        #    - β < 1: Decreasing failure rate (early failures)
+        #    - β = 1: Constant failure rate (random failures)
+        #    - β > 1: Increasing failure rate (wear-out failures)
+        #    
+        #    - **Weibull Scale Parameter (η)**: Characteristic life, the time at which 63.2% of items will fail
+        #    
+        #    - **Weibull Curves**: Visual representation of failure probability or reliability over time
+        #    """)
+        #
+        #with st.expander("How to use this application"):
+        #    st.markdown("""
+        #    1. Select your asset type from the dropdown above
+        #    2. Configure the operating characteristics relevant to your asset
+        #    3. Set advanced options if needed (temperature profile, maintenance regime, etc.)
+        #    4. Click 'Generate FMEA' to create your analysis
+        #    5. Explore the results in the FMEA Results and Weibull Analysis tabs
+        #    6. Export your results in your preferred format
+        #    """)
