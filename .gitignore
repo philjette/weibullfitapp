@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# VSCode
+.vscode/
+
+# Environment and secrets
+.env
+.env.*
+
+# Streamlit specific
+*.streamlit/

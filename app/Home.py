@@ -1,5 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+import os
+
+openai_key = os.getenv("OPENAI_API_KEY")
 
 # Import pages as modules
 from app_pages import (
