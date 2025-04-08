@@ -16,15 +16,14 @@ from utils.asset_data import (
 )
 
 def show():
-    st.title("FMEA-Based Fit")
 
     # Title and description
     st.title("AI-Powered FMEA Analysis")
     st.markdown(
         """
-        This tool helps generate Failure Mode and Effects Analysis (FMEA) for electrical 
-        transmission and distribution assets. Specify your asset characteristics below
+        Generate Failure Mode and Effects Analysis (FMEA). Specify your asset characteristics below
         and the system will generate an FMEA along with corresponding Weibull failure curves.
+        Currently only available for select elctrical transmission and distribution assets.
         """
     )
 
